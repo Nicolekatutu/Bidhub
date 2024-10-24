@@ -1,0 +1,6 @@
+@Bidhub_HostAddress = http://localhost:5072
+
+GET {{Bidhub_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
