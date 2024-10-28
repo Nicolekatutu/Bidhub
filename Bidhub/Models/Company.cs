@@ -6,7 +6,7 @@ namespace Bidhub.Models
     {
         [Key]
         public int CompanyId { get; set; }
-        public string CompanyName { get; set; }
+        public string? CompanyName { get; set; }
         public string? CompanyUrl { get; set; } 
         public string? Location { get; set; }
         public string? Status { get; set; }

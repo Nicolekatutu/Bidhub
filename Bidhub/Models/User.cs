@@ -6,14 +6,14 @@ namespace Bidhub.Models
     public class User: IdentityUser<Guid>
     {
         [Key]
-        public int UserId { get; set; }
+        public Guid UserId { get; set; }
         public required string FirstName { get; set; }
         public required string LastName { get; set; }
         public  override string UserName { get; set; }
         public  required string Email { get; set; }
-        public string Password { get; set; }
-        public string  PhysicalAddress { get; set; }
-        public  string PhoneNumber { get; set; }
+        public string? Password { get; set; }
+        public string?  PhysicalAddress { get; set; }
+        public  string? PhoneNumber { get; set; }
         public bool IsVerified { get; set; }
 
         public ICollection<Bidders> Bidders { get; set; }

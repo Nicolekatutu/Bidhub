@@ -1,8 +1,10 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore;
 
 namespace Bidhub.Models
 {
-    public class UserContext : DbContext
+    public class UserContext : IdentityDbContext<User, IdentityRole<Guid>, Guid>
     {
         public UserContext(DbContextOptions<UserContext> options) : base(options)
         {
@@ -17,11 +19,12 @@ namespace Bidhub.Models
         public DbSet<ProductPhoto> ProductPhotos { get; set; }
         public DbSet<BidDates> BidDetails { get; set; }
         public DbSet<BViewing> BViewings { get; set; }
-        public DbSet<Role> Roles { get; set; }
-        public DbSet<UserRoles> UserRoles { get; set; }
+        
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
+
+            base.OnModelCreating(modelBuilder);
             //  relationships
             modelBuilder.Entity<Product>().HasOne(p => p.Auctioneer) .WithMany(a => a.Products).HasForeignKey(p => p.AuctioneerId);
 

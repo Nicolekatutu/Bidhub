@@ -61,7 +61,7 @@ namespace Bidhub.Controllers
 
             var bidder = new Bidders
             {
-                UserId = user.UserId, 
+                UserId = user.Id ,
                 CompanyUrl = model.CompanyUrl
             };
 
@@ -72,7 +72,7 @@ namespace Bidhub.Controllers
 
             var otpEntry = new UserOtp
             {
-                UserId = user.UserId, 
+                UserId = user.Id, 
                 OtpCode = otp,
                 ExpiryTime = DateTime.UtcNow.AddMinutes(15)
             };
@@ -131,7 +131,7 @@ namespace Bidhub.Controllers
 
             var auctioneer = new Auctioneer
             {
-                UserId = user.UserId, 
+                UserId = user.Id, 
                 Role = model.Role,
                 StaffNo = model.StaffNo,
                 CompanyId = company.CompanyId
@@ -154,9 +154,10 @@ namespace Bidhub.Controllers
             }
 
             var otpEntry = await _userContext.UserOtps
-                .Where(o => o.UserId == user.UserId && o.OtpCode == otp)
-                .OrderByDescending(o => o.ExpiryTime)
-                .FirstOrDefaultAsync();
+                 .Where(o => o.UserId == user.Id && o.OtpCode == otp)
+                 .OrderByDescending(o => o.ExpiryTime)
+                 .FirstOrDefaultAsync();
+
 
             if (otpEntry == null || otpEntry.ExpiryTime < DateTime.UtcNow)
             {
@@ -170,14 +171,13 @@ namespace Bidhub.Controllers
             return Ok(new { message = "User verified successfully" });
         }
 
-        // Utility method to generate a 6-digit OTP
+        
         private string GenerateOTP()
         {
             var random = new Random();
             return random.Next(100000, 999999).ToString();
         }
 
-        // Utility method to send OTP via email
         private async Task<bool> SendOtpByEmail(string email, string otp)
         {
             try

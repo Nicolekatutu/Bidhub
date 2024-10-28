@@ -5,7 +5,7 @@
 namespace Bidhub.Migrations
 {
     /// <inheritdoc />
-    public partial class updateuser : Migration
+    public partial class UpdateIdentity : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)

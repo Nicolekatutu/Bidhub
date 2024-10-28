@@ -10,7 +10,7 @@ namespace Bidhub.Models
         public int AuctioneerId { get; set; }
 
         [ForeignKey("User")]
-        public int UserId { get; set; }
+        public Guid UserId { get; set; }
         public User User { get; set; }
         public string? PhotoUrl { get; set; }
         public string Role { get; set; }
@@ -19,8 +19,6 @@ namespace Bidhub.Models
         [ForeignKey("Company")]
         public int CompanyId { get; set; }
         public Company Company { get; set; }
-        
-        
         public ICollection<Product> Products { get; set; } = new List<Product>();
 
 
